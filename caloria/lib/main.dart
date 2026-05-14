@@ -2,34 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'core/theme/app_theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  // .env yükle
   await dotenv.load(fileName: '.env');
-
-  // Firebase başlat
-  await Firebase.initializeApp();
-
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     const ProviderScope(
-      child: CaoriaApp(),
+      child: CaloriaApp(),
     ),
   );
 }
 
-class CaoriaApp extends StatelessWidget {
-  const CaoriaApp({super.key});
+class CaloriaApp extends StatelessWidget {
+  const CaloriaApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Caloria',
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: ThemeMode.system,
+      home: const Scaffold(
         body: Center(
-          child: Text('Caloria'),
+          child: Text('Caloria 🔥'),
         ),
       ),
     );

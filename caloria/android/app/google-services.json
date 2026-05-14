@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "874189340834",
+    "project_id": "caloria-234d2",
+    "storage_bucket": "caloria-234d2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:874189340834:android:cfceca1a3e1617c02357fb",
+        "android_client_info": {
+          "package_name": "com.burak.topcu.caloria"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlhyE2gG2dJVnf3_CLbktRPxydt_TNisA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:874189340834:android:370e05a2a977ac222357fb",
+        "android_client_info": {
+          "package_name": "com.buraktopcu.caloria"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlhyE2gG2dJVnf3_CLbktRPxydt_TNisA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
