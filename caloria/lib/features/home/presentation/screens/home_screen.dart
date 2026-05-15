@@ -6,6 +6,8 @@ import '../../../profile/presentation/providers/profile_provider.dart';
 import '../widgets/calorie_summary_card.dart';
 import '../widgets/macro_card.dart';
 import '../widgets/meal_section.dart';
+import 'package:go_router/go_router.dart';
+import '../../../../routes/app_routes.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -31,7 +33,7 @@ class HomeScreen extends ConsumerWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () => context.push(AppRoutes.camera),
         backgroundColor: AppColors.primary,
         icon: const Icon(Icons.camera_alt_rounded, color: Colors.white),
         label: const Text('Analiz Et',

@@ -7,6 +7,8 @@ import '../features/home/presentation/screens/home_screen.dart';
 import '../features/history/presentation/screens/history_screen.dart';
 import '../features/weight_tracking/presentation/screens/progress_screen.dart';
 import '../features/profile/presentation/screens/profile_screen.dart';
+import '../features/ai_analysis/presentation/screens/camera_screen.dart';
+import '../features/ai_analysis/presentation/screens/ai_result_screen.dart';
 import '../shared/widgets/app_shell.dart';
 import 'app_routes.dart';
 
@@ -18,7 +20,6 @@ GoRouter createRouter(Ref ref) {
       final isLoggedIn = authState.valueOrNull != null;
       final isAuthRoute = state.matchedLocation == AppRoutes.login ||
           state.matchedLocation == AppRoutes.register;
-
       if (!isLoggedIn && !isAuthRoute) return AppRoutes.login;
       if (isLoggedIn && isAuthRoute) return AppRoutes.home;
       return null;
@@ -31,6 +32,14 @@ GoRouter createRouter(Ref ref) {
       GoRoute(
         path: AppRoutes.register,
         builder: (context, state) => const RegisterScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.camera,
+        builder: (context, state) => const CameraScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.aiResult,
+        builder: (context, state) => const AiResultScreen(),
       ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
