@@ -50,7 +50,7 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBlhyE2gG2dJVnf3_CLbktRPxydt_TNisA',
+    apiKey: 'GEMINI_API_KEY',
     appId: '1:874189340834:android:370e05a2a977ac222357fb',
     messagingSenderId: '874189340834',
     projectId: 'caloria-234d2',
@@ -58,12 +58,11 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDJJJbjv-Y8MeuIt5uosANiWXauwD-xqTA',
+    apiKey: 'GEMINI_API_KEY',
     appId: '1:874189340834:ios:9baaf8aa9ebccf602357fb',
     messagingSenderId: '874189340834',
     projectId: 'caloria-234d2',
     storageBucket: 'caloria-234d2.firebasestorage.app',
     iosBundleId: 'com.buraktopcu.caloria',
   );
-
 }
