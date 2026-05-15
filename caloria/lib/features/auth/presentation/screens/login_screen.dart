@@ -18,6 +18,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   bool _isLoading = false;
   bool _obscurePassword = true;
   String? _errorMessage;
+  
+  
 
   @override
   void dispose() {
@@ -45,6 +47,22 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       if (mounted) setState(() => _isLoading = false);
     }
   }
+  Future<void> _signInAnonymously() async {
+  setState(() {
+    _isLoading = true;
+    _errorMessage = null;
+  });
+  try {
+    await ref.read(authRepositoryProvider).signInAnonymously();
+    if (mounted) context.go(AppRoutes.home);
+  } catch (e) {
+    setState(() {
+      _errorMessage = 'Misafir girişi başarısız oldu.';
+    });
+  } finally {
+    if (mounted) setState(() => _isLoading = false);
+  }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -157,6 +175,21 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           ),
                         ),
                       ],
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 8),
+              SizedBox(
+                width: double.infinity,
+                child: OutlinedButton.icon(
+                  onPressed: _isLoading ? null : _signInAnonymously,
+                  icon: const Icon(Icons.person_outline_rounded),
+                  label: const Text('Misafir olarak devam et'),
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
                     ),
                   ),
                 ),
