@@ -1,0 +1,11 @@
+{
+  "folders": [
+    {
+      "name": "Caloria (Flutter)",
+      "path": "caloria"
+    }
+  ],
+  "settings": {
+    "dart.projectSearchDepth": 5
+  }
+}

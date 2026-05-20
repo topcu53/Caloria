@@ -9,9 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-dependencies:
   flutter_dotenv: ^5.1.0
+
   # UI
   cupertino_icons: ^1.0.6
   shimmer: ^3.0.0
@@ -50,7 +49,6 @@ dependencies:
   purchases_flutter: ^8.2.1
 
   # Utils
-  flutter_dotenv: ^5.1.0
   intl: ^0.19.0
   equatable: ^2.0.5
 

@@ -1,0 +1,12 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "caloria",
+      "request": "launch",
+      "type": "dart",
+      "cwd": "${workspaceFolder}/caloria",
+      "program": "lib/main.dart"
+    }
+  ]
+}
