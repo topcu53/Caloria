@@ -1,17 +1,29 @@
-# caloria
+# Caloria
 
-A new Flutter project.
+AI destekli kalori ve beslenme takip uygulaması (Flutter · Firebase · Gemini).
 
-## Getting Started
+## Geliştirme
 
-This project is a starting point for a Flutter application.
+```bash
+cp .env.example .env
+# GEMINI_API_KEY ve isteğe bağlı AdMob değerlerini doldurun
 
-A few resources to get you started if this is your first Flutter project:
+flutter pub get
+flutter run
+```
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+## Mağaza derlemesi
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Ayrıntılı adımlar: **[RELEASE.md](RELEASE.md)**
+
+```bash
+cp dart_defines.example.json dart_defines.json
+./scripts/build_release.sh
+```
+
+## Paket kimliği
+
+| Platform | ID |
+|----------|-----|
+| Android | `com.buraktopcu.caloria` |
+| iOS | `com.buraktopcu.caloria` |

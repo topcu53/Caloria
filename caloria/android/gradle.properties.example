@@ -1,0 +1,4 @@
+# Gerçek AdMob App ID (AndroidManifest ile aynı olmalı)
+# Bu satırı android/gradle.properties dosyanıza ekleyin veya:
+# flutter build appbundle -P ADMOB_APP_ID=ca-app-pub-xxx~yyy
+ADMOB_APP_ID=ca-app-pub-3940256099942544~3347511713

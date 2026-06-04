@@ -48,7 +48,7 @@ class CalorieSummaryCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
             child: LinearProgressIndicator(
               value: progress,
-              backgroundColor: Colors.white.withOpacity(0.3),
+              backgroundColor: Colors.white.withValues(alpha: 0.3),
               valueColor: const AlwaysStoppedAnimation(Colors.white),
               minHeight: 8,
             ),
@@ -75,7 +75,7 @@ class _CircularCalorie extends StatelessWidget {
           height: 100,
           child: CircularProgressIndicator(
             value: progress,
-            backgroundColor: Colors.white.withOpacity(0.3),
+            backgroundColor: Colors.white.withValues(alpha: 0.3),
             valueColor: const AlwaysStoppedAnimation(Colors.white),
             strokeWidth: 8,
           ),
@@ -118,14 +118,14 @@ class _StatItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(label, style: TextStyle(color: color.withOpacity(0.8), fontSize: 12)),
+        Text(label, style: TextStyle(color: color.withValues(alpha: 0.8), fontSize: 12)),
         const SizedBox(height: 4),
         Text(
           value,
           style: TextStyle(
               color: color, fontSize: 22, fontWeight: FontWeight.w800),
         ),
-        Text(unit, style: TextStyle(color: color.withOpacity(0.8), fontSize: 11)),
+        Text(unit, style: TextStyle(color: color.withValues(alpha: 0.8), fontSize: 11)),
       ],
     );
   }

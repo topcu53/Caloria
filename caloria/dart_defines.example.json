@@ -1,0 +1,9 @@
+{
+  "GEMINI_API_KEY": "your_gemini_api_key",
+  "ADMOB_APP_ID_ANDROID": "ca-app-pub-6085407673736182~9241529376",
+  "ADMOB_APP_ID_IOS": "ca-app-pub-6085407673736182~9167857273",
+  "ADMOB_BANNER_ANDROID": "ca-app-pub-xxxxxxxx/1111111111",
+  "ADMOB_BANNER_IOS": "ca-app-pub-xxxxxxxx/2222222222",
+  "ADMOB_INTERSTITIAL_ANDROID": "ca-app-pub-xxxxxxxx/3333333333",
+  "ADMOB_INTERSTITIAL_IOS": "ca-app-pub-xxxxxxxx/4444444444"
+}

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../../../core/providers/calendar_day_provider.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../meals/data/datasources/meal_remote_datasource.dart';
 import '../../../meals/domain/entities/meal_entity.dart';
@@ -8,6 +9,15 @@ import '../providers/ai_analysis_provider.dart';
 
 class AiResultScreen extends ConsumerWidget {
   const AiResultScreen({super.key});
+
+  static String formatError(Object? error) {
+    if (error == null) return 'Analiz başarısız. Tekrar deneyin.';
+    final text = error.toString();
+    if (text.startsWith('Exception: ')) {
+      return text.replaceFirst('Exception: ', '');
+    }
+    return text;
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -26,8 +36,18 @@ class AiResultScreen extends ConsumerWidget {
                 const Icon(Icons.error_outline, color: Colors.red, size: 48),
                 const SizedBox(height: 16),
                 Text(
-                  'Analiz başarısız:\n${analysisState.error}',
+                  formatError(analysisState.error),
                   textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                const SizedBox(height: 24),
+                FilledButton.icon(
+                  onPressed: () {
+                    ref.read(aiAnalysisProvider.notifier).reset();
+                    context.pop();
+                  },
+                  icon: const Icon(Icons.arrow_back),
+                  label: const Text('Geri dön'),
                 ),
               ],
             ),
@@ -199,7 +219,7 @@ class _NutritionRow extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: color.withOpacity(0.1),
+              color: color.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(icon, color: color, size: 20),
@@ -249,7 +269,8 @@ class _SaveButton extends StatelessWidget {
           mealType: mealType,
           createdAt: DateTime.now(),
         );
-        await MealRemoteDataSource().saveMeal(meal, DateTime.now());
+        final day = ref.read(calendarDayProvider);
+        await MealRemoteDataSource().saveMeal(meal, day);
         ref.read(aiAnalysisProvider.notifier).reset();
         if (context.mounted) {
           ScaffoldMessenger.of(

@@ -19,9 +19,14 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<UserEntity> registerWithEmailAndPassword(
     String email,
-    String password,
-  ) async {
-    return await _dataSource.registerWithEmailAndPassword(email, password);
+    String password, {
+    String? displayName,
+  }) async {
+    return await _dataSource.registerWithEmailAndPassword(
+      email,
+      password,
+      displayName: displayName,
+    );
   }
 
   @override
@@ -34,5 +39,10 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<UserEntity> signInAnonymously() async {
     return await _dataSource.signInAnonymously();
+  }
+
+  @override
+  Future<void> updateDisplayName(String name) async {
+    await _dataSource.updateDisplayName(name);
   }
 }

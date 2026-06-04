@@ -17,12 +17,9 @@ class AiAnalysisNotifier extends AsyncNotifier<MealAnalysisEntity?> {
   Future<void> analyzeImage(File image) async {
     state = const AsyncLoading();
     try {
-      await ref.read(geminiServiceProvider).listModels(); // modelleri listele
       final result = await ref.read(geminiServiceProvider).analyzeMeal(image);
       state = AsyncData(result);
     } catch (e, st) {
-      print('Gemini HATA: $e');
-      print('Stack: $st');
       state = AsyncError(e, st);
     }
   }

@@ -7,6 +7,7 @@ import '../features/home/presentation/screens/home_screen.dart';
 import '../features/history/presentation/screens/history_screen.dart';
 import '../features/weight_tracking/presentation/screens/progress_screen.dart';
 import '../features/profile/presentation/screens/profile_screen.dart';
+import '../features/ai_analysis/presentation/screens/analysis_loading_screen.dart';
 import '../features/ai_analysis/presentation/screens/camera_screen.dart';
 import '../features/ai_analysis/presentation/screens/ai_result_screen.dart';
 import '../shared/widgets/app_shell.dart';
@@ -14,9 +15,10 @@ import 'app_routes.dart';
 
 GoRouter createRouter(Ref ref) {
   return GoRouter(
-    initialLocation: AppRoutes.home,
+    initialLocation: AppRoutes.login,
     redirect: (context, state) {
       final authState = ref.read(authStateProvider);
+      if (authState.isLoading) return null;
       final isLoggedIn = authState.valueOrNull != null;
       final isAuthRoute = state.matchedLocation == AppRoutes.login ||
           state.matchedLocation == AppRoutes.register;
@@ -36,6 +38,13 @@ GoRouter createRouter(Ref ref) {
       GoRoute(
         path: AppRoutes.camera,
         builder: (context, state) => const CameraScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.analysisLoading,
+        builder: (context, state) {
+          final path = state.extra as String? ?? '';
+          return AnalysisLoadingScreen(imagePath: path);
+        },
       ),
       GoRoute(
         path: AppRoutes.aiResult,

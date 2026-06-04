@@ -56,8 +56,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -67,10 +65,12 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 <key>GADApplicationIdentifier</key>
-<string>ca-app-pub-3940256099942544~1458002511</string>
+<string>ca-app-pub-6085407673736182~9167857273</string>
 <key>NSCameraUsageDescription</key>
 <string>Yemek fotoğrafı çekmek için kamera erişimi gerekiyor</string>
 <key>NSPhotoLibraryUsageDescription</key>
 <string>Galeriden yemek fotoğrafı seçmek için erişim gerekiyor</string>
+<key>NSUserNotificationsUsageDescription</key>
+<string>Su içme hatırlatıcısı için bildirim izni gerekiyor</string>
 </dict>
 </plist>

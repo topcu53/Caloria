@@ -44,3 +44,7 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 .env
+dart_defines.json
+android/key.properties
+android/upload-keystore.jks
+**/*.jks

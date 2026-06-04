@@ -1,0 +1,10 @@
+{
+  "file_generated_by": "FlutterFire CLI",
+  "purpose": "FirebaseAppID & ProjectID for this Firebase app in this directory",
+  "GOOGLE_APP_ID": "1:874189340834:ios:9baaf8aa9ebccf602357fb",
+  "FIREBASE_PROJECT_ID": "caloria-234d2",
+  "GCM_SENDER_ID": "874189340834",
+  "BUNDLE_ID": "com.buraktopcu.caloria",
+  "PROJECT_ID": "caloria-234d2",
+  "STORAGE_BUCKET": "caloria-234d2.firebasestorage.app"
+}

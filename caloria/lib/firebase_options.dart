@@ -50,7 +50,7 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'GEMINI_API_KEY',
+    apiKey: 'AIzaSyBlhyE2gG2dJVnf3_CLbktRPxydt_TNisA',
     appId: '1:874189340834:android:370e05a2a977ac222357fb',
     messagingSenderId: '874189340834',
     projectId: 'caloria-234d2',
@@ -58,7 +58,7 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'GEMINI_API_KEY',
+    apiKey: 'AIzaSyBlhyE2gG2dJVnf3_CLbktRPxydt_TNisA',
     appId: '1:874189340834:ios:9baaf8aa9ebccf602357fb',
     messagingSenderId: '874189340834',
     projectId: 'caloria-234d2',

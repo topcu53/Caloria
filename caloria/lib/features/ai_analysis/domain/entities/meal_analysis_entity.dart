@@ -17,12 +17,19 @@ class MealAnalysisEntity {
 
   factory MealAnalysisEntity.fromMap(Map<String, dynamic> map) {
     return MealAnalysisEntity(
-      food: map['food'] ?? '',
-      calories: (map['calories'] ?? 0).toDouble(),
-      protein: (map['protein'] ?? 0).toDouble(),
-      carbs: (map['carbs'] ?? 0).toDouble(),
-      fat: (map['fat'] ?? 0).toDouble(),
-      portion: map['portion'] ?? '',
+      food: map['food']?.toString() ?? '',
+      calories: _toDouble(map['calories']),
+      protein: _toDouble(map['protein']),
+      carbs: _toDouble(map['carbs']),
+      fat: _toDouble(map['fat']),
+      portion: map['portion']?.toString() ?? '',
     );
+  }
+
+  static double _toDouble(dynamic value) {
+    if (value == null) return 0;
+    if (value is num) return value.toDouble();
+    if (value is String) return double.tryParse(value.replaceAll(',', '.')) ?? 0;
+    return 0;
   }
 }

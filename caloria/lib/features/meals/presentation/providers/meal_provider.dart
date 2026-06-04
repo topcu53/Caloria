@@ -1,14 +1,18 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../core/providers/calendar_day_provider.dart';
 import '../../data/datasources/meal_remote_datasource.dart';
 import '../../domain/entities/meal_entity.dart';
 
 final mealDataSourceProvider = Provider((ref) => MealRemoteDataSource());
 
-final selectedDateProvider = StateProvider<DateTime>((ref) => DateTime.now());
+/// Ana sayfa ve öğün kayıtları için aktif takvim günü.
+final selectedDateProvider = Provider<DateTime>(
+  (ref) => ref.watch(calendarDayProvider),
+);
 
 final mealsProvider = StreamProvider.family<List<MealEntity>, String>(
   (ref, mealType) {
-    final date = ref.watch(selectedDateProvider);
+    final date = ref.watch(calendarDayProvider);
     return ref.watch(mealDataSourceProvider).watchMealsForDate(date, mealType);
   },
 );

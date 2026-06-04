@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../core/providers/calendar_day_provider.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../meals/presentation/providers/daily_log_provider.dart';
 import '../../../meals/presentation/providers/meal_provider.dart';
 import '../../../profile/presentation/providers/profile_provider.dart';
 import '../widgets/calorie_summary_card.dart';
+import '../widgets/meal_suggestions_app_bar_action.dart';
 import '../widgets/macro_card.dart';
 import '../widgets/meal_section.dart';
+import '../widgets/profile_setup_banner.dart';
+import '../widgets/water_tracker_card.dart';
+import '../../../../core/widgets/app_bootstrap.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../routes/app_routes.dart';
 
@@ -16,7 +22,7 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final summary = ref.watch(dailySummaryProvider);
     final profileAsync = ref.watch(userProfileProvider);
-
+    final today = ref.watch(calendarDayProvider);
     final calorieGoal = profileAsync.valueOrNull?.dailyCalorieGoal ?? 2000;
     final proteinGoal = profileAsync.valueOrNull?.dailyProteinGoal ?? 150;
     final carbsGoal = profileAsync.valueOrNull?.dailyCarbsGoal ?? 250;
@@ -25,12 +31,7 @@ class HomeScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Caloria'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications_outlined),
-            onPressed: () {},
-          ),
-        ],
+        actions: const [MealSuggestionsAppBarAction()],
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => context.push(AppRoutes.camera),
@@ -39,16 +40,20 @@ class HomeScreen extends ConsumerWidget {
         label: const Text('Analiz Et',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
       ),
-      body: RefreshIndicator(
+      body: AppBootstrap(
+        child: RefreshIndicator(
         onRefresh: () async {
+          ref.read(calendarDayProvider.notifier).syncToToday();
           ref.invalidate(mealsProvider);
+          ref.invalidate(todayWaterMlProvider);
+          ref.invalidate(historyDatesProvider);
         },
         child: ListView(
           padding: const EdgeInsets.all(20),
           children: [
             // Tarih
             Text(
-              _todayText(),
+              _todayText(today),
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: Colors.grey,
                   ),
@@ -59,6 +64,12 @@ class HomeScreen extends ConsumerWidget {
               style: Theme.of(context).textTheme.headlineLarge,
             ),
             const SizedBox(height: 20),
+
+            if (profileAsync.valueOrNull?.hasBodyMetrics != true)
+              const Padding(
+                padding: EdgeInsets.only(bottom: 16),
+                child: ProfileSetupBanner(),
+              ),
 
             // Kalori Card
             CalorieSummaryCard(
@@ -101,6 +112,8 @@ class HomeScreen extends ConsumerWidget {
                 ),
               ],
             ),
+            const SizedBox(height: 16),
+            const WaterTrackerCard(),
             const SizedBox(height: 24),
 
             // Öğünler
@@ -135,15 +148,15 @@ class HomeScreen extends ConsumerWidget {
           ],
         ),
       ),
+      ),
     );
   }
 
-  String _todayText() {
-    final now = DateTime.now();
+  String _todayText(DateTime day) {
     const months = [
       'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
       'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'
     ];
-    return '${now.day} ${months[now.month - 1]} ${now.year}';
+    return '${day.day} ${months[day.month - 1]} ${day.year}';
   }
 }

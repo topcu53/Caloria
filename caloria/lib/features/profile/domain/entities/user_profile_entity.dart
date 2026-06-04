@@ -13,6 +13,8 @@ class UserProfileEntity {
   final double dailyCarbsGoal;
   final double dailyFatGoal;
   final double dailyWaterGoal;
+  final bool waterReminderEnabled;
+  final double? targetWeightKg;
 
   const UserProfileEntity({
     required this.id,
@@ -29,6 +31,8 @@ class UserProfileEntity {
     this.dailyCarbsGoal = 250,
     this.dailyFatGoal = 65,
     this.dailyWaterGoal = 2500,
+    this.waterReminderEnabled = true,
+    this.targetWeightKg,
   });
 
   UserProfileEntity copyWith({
@@ -44,6 +48,8 @@ class UserProfileEntity {
     double? dailyCarbsGoal,
     double? dailyFatGoal,
     double? dailyWaterGoal,
+    bool? waterReminderEnabled,
+    double? targetWeightKg,
   }) {
     return UserProfileEntity(
       id: id,
@@ -60,6 +66,9 @@ class UserProfileEntity {
       dailyCarbsGoal: dailyCarbsGoal ?? this.dailyCarbsGoal,
       dailyFatGoal: dailyFatGoal ?? this.dailyFatGoal,
       dailyWaterGoal: dailyWaterGoal ?? this.dailyWaterGoal,
+      waterReminderEnabled:
+          waterReminderEnabled ?? this.waterReminderEnabled,
+      targetWeightKg: targetWeightKg ?? this.targetWeightKg,
     );
   }
 
@@ -79,8 +88,18 @@ class UserProfileEntity {
       'dailyCarbsGoal': dailyCarbsGoal,
       'dailyFatGoal': dailyFatGoal,
       'dailyWaterGoal': dailyWaterGoal,
+      'waterReminderEnabled': waterReminderEnabled,
+      'targetWeightKg': targetWeightKg,
     };
   }
+
+  bool get hasBodyMetrics =>
+      weight != null &&
+      weight! > 0 &&
+      height != null &&
+      height! > 0 &&
+      age != null &&
+      age! > 0;
 
   factory UserProfileEntity.fromMap(Map<String, dynamic> map) {
     return UserProfileEntity(
@@ -98,6 +117,8 @@ class UserProfileEntity {
       dailyCarbsGoal: map['dailyCarbsGoal']?.toDouble() ?? 250,
       dailyFatGoal: map['dailyFatGoal']?.toDouble() ?? 65,
       dailyWaterGoal: map['dailyWaterGoal']?.toDouble() ?? 2500,
+      waterReminderEnabled: map['waterReminderEnabled'] as bool? ?? true,
+      targetWeightKg: map['targetWeightKg']?.toDouble(),
     );
   }
 }
