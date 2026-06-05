@@ -13,6 +13,9 @@ class AdService {
   bool _initialized = false;
   InterstitialAd? _interstitial;
   bool _loadingInterstitial = false;
+  bool interstitialShownThisSession = false;
+
+  bool get isInitialized => _initialized;
 
   static String get bannerAdUnitId {
     if (kIsWeb) return '';
@@ -26,27 +29,65 @@ class AdService {
 
   Future<void> initialize() async {
     if (_initialized || kIsWeb) return;
-    if (!kDebugMode && !AppConfig.hasProductionAdUnits) {
-      appLog('AdMob: release modda birim ID tanımlı değil, reklamlar kapalı.');
+
+    if (!AppConfig.hasProductionAdUnitsForCurrentPlatform()) {
+      debugPrint(
+        'AdMob HATA: Bu platform için reklam birimi tanımlı değil. '
+        'admob_config.json kontrol edin.',
+      );
       return;
     }
-    await MobileAds.instance.initialize();
+
+    final status = await MobileAds.instance.initialize();
     _initialized = true;
-    preloadInterstitial();
+
+    if (kDebugMode) {
+      debugPrint('AdMob SDK hazır.');
+      debugPrint('Banner birimi: $bannerAdUnitId');
+      debugPrint('Interstitial birimi: $interstitialAdUnitId');
+      for (final entry in status.adapterStatuses.entries) {
+        debugPrint('Adapter ${entry.key}: ${entry.value.state}');
+      }
+    }
+
+    if (AppConfig.hasInterstitialForCurrentPlatform) {
+      preloadInterstitial();
+    }
   }
 
-  BannerAd? createBannerAd({void Function()? onLoaded}) {
-    if (kIsWeb || bannerAdUnitId.isEmpty) return null;
+  Future<void> ensureInitialized() async {
+    if (!_initialized) await initialize();
+  }
+
+  Future<BannerAd?> createBannerAd({
+    required int width,
+    void Function()? onLoaded,
+    void Function(LoadAdError error)? onFailed,
+  }) async {
+    await ensureInitialized();
+    if (!_initialized || kIsWeb || bannerAdUnitId.isEmpty) return null;
+
+    final anchoredSize =
+        await AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(
+      width,
+    );
+    final size = anchoredSize ?? AdSize.banner;
 
     final ad = BannerAd(
       adUnitId: bannerAdUnitId,
-      size: AdSize.banner,
+      size: size,
       request: const AdRequest(),
       listener: BannerAdListener(
-        onAdLoaded: (_) => onLoaded?.call(),
+        onAdLoaded: (_) {
+          appLog('AdMob: Banner yüklendi.');
+          onLoaded?.call();
+        },
         onAdFailedToLoad: (ad, error) {
-          appLog('Banner yüklenemedi: $error');
+          debugPrint(
+            'AdMob Banner HATA (kod=${error.code}): ${error.message}',
+          );
           ad.dispose();
+          onFailed?.call(error);
         },
       ),
     );
@@ -58,10 +99,10 @@ class AdService {
     if (!_initialized ||
         kIsWeb ||
         interstitialAdUnitId.isEmpty ||
-        _interstitial != null) {
+        _interstitial != null ||
+        _loadingInterstitial) {
       return;
     }
-    if (_loadingInterstitial) return;
     _loadingInterstitial = true;
 
     InterstitialAd.load(
@@ -71,9 +112,12 @@ class AdService {
         onAdLoaded: (ad) {
           _interstitial = ad;
           _loadingInterstitial = false;
+          appLog('AdMob: Interstitial hazır.');
         },
         onAdFailedToLoad: (error) {
-          appLog('Interstitial yüklenemedi: $error');
+          debugPrint(
+            'AdMob Interstitial HATA (kod=${error.code}): ${error.message}',
+          );
           _loadingInterstitial = false;
         },
       ),
@@ -91,10 +135,11 @@ class AdService {
       onAdDismissedFullScreenContent: (d) {
         d.dispose();
         if (!completer.isCompleted) completer.complete();
+        interstitialShownThisSession = true;
         preloadInterstitial();
       },
       onAdFailedToShowFullScreenContent: (d, error) {
-        appLog('Interstitial gösterilemedi: $error');
+        debugPrint('AdMob Interstitial gösterim HATA: ${error.message}');
         d.dispose();
         if (!completer.isCompleted) completer.complete();
         preloadInterstitial();
@@ -106,17 +151,29 @@ class AdService {
       const Duration(seconds: 90),
       onTimeout: () {},
     );
+    interstitialShownThisSession = true;
     return true;
   }
 
-  Future<bool> showInterstitialWhenReady({
-    Duration maxWait = const Duration(seconds: 3),
+  Future<bool> waitAndShowInterstitial({
+    Duration maxWait = const Duration(seconds: 20),
   }) async {
+    await ensureInitialized();
+    if (!_initialized) return false;
+
+    preloadInterstitial();
     final deadline = DateTime.now().add(maxWait);
     while (DateTime.now().isBefore(deadline)) {
       if (await showInterstitialIfReady()) return true;
-      await Future.delayed(const Duration(milliseconds: 250));
+      if (_interstitial == null && !_loadingInterstitial) {
+        preloadInterstitial();
+      }
+      await Future.delayed(const Duration(milliseconds: 400));
     }
+    debugPrint(
+      'AdMob: Interstitial ${maxWait.inSeconds}s içinde gelmedi '
+      '(yeni hesaplarda / emülatörde normal olabilir).',
+    );
     return false;
   }
 }

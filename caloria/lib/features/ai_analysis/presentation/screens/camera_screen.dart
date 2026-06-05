@@ -7,14 +7,31 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/services/ad_service.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../routes/app_routes.dart';
+import '../../../../shared/widgets/banner_ad_widget.dart';
 
-class CameraScreen extends ConsumerWidget {
+class CameraScreen extends ConsumerStatefulWidget {
   const CameraScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<CameraScreen> createState() => _CameraScreenState();
+}
+
+class _CameraScreenState extends ConsumerState<CameraScreen> {
+  @override
+  void initState() {
+    super.initState();
+    AdService.instance.ensureInitialized().then((_) {
+      AdService.instance.preloadInterstitial();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Yemek Analizi')),
+      bottomNavigationBar: const SafeArea(
+        child: BannerAdWidget(),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(

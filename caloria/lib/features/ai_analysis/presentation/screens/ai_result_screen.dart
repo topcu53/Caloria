@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/providers/calendar_day_provider.dart';
+import '../../../../routes/app_routes.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../meals/data/datasources/meal_remote_datasource.dart';
 import '../../../meals/domain/entities/meal_entity.dart';
@@ -44,7 +45,7 @@ class AiResultScreen extends ConsumerWidget {
                 FilledButton.icon(
                   onPressed: () {
                     ref.read(aiAnalysisProvider.notifier).reset();
-                    context.pop();
+                    context.go(AppRoutes.home);
                   },
                   icon: const Icon(Icons.arrow_back),
                   label: const Text('Geri dön'),
@@ -67,7 +68,7 @@ class AiResultScreen extends ConsumerWidget {
           icon: const Icon(Icons.close),
           onPressed: () {
             ref.read(aiAnalysisProvider.notifier).reset();
-            context.pop();
+            context.go(AppRoutes.home);
           },
         ),
       ),
@@ -276,7 +277,7 @@ class _SaveButton extends StatelessWidget {
           ScaffoldMessenger.of(
             context,
           ).showSnackBar(SnackBar(content: Text('$label\'a kaydedildi!')));
-          context.go('/home');
+          context.go(AppRoutes.home);
         }
       },
       style: ElevatedButton.styleFrom(
