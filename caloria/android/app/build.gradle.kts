@@ -20,7 +20,7 @@ val admobAppId: String =
         ?: "ca-app-pub-3940256099942544~3347511713"
 
 android {
-    namespace = "com.buraktopcu.caloria"
+    namespace = "com.buraktopcu.calori"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -41,7 +41,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.buraktopcu.caloria"
+        applicationId = "com.buraktopcu.calori"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode

@@ -25,5 +25,5 @@ cp dart_defines.example.json dart_defines.json
 
 | Platform | ID |
 |----------|-----|
-| Android | `com.buraktopcu.caloria` |
+| Android | `com.buraktopcu.calori` |
 | iOS | `com.buraktopcu.caloria` |

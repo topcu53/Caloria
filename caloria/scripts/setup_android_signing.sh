@@ -32,7 +32,7 @@ cat > "$PROPS" <<EOF
 storePassword=$STORE_PASS
 keyPassword=$KEY_PASS
 keyAlias=upload
-storeFile=upload-keystore.jks
+storeFile=../upload-keystore.jks
 EOF
 
 echo ""

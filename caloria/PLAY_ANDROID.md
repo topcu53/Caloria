@@ -4,7 +4,7 @@
 
 | Alan | Değer |
 |------|--------|
-| Paket adı | `com.buraktopcu.caloria` |
+| Paket adı | `com.buraktopcu.calori` |
 | Sürüm | `1.0.0` (build `1`) |
 | Min Android | 7.0 (API 24) |
 | AdMob App ID | `ca-app-pub-6085407673736182~9241529376` |
@@ -95,7 +95,7 @@ Bir web sayfası URL’si gerekir. Örnek içerik konuları:
 
 ## Adım 4 — AdMob mağaza bağlantısı
 
-AdMob → Caloria Android → **Mağaza ekle** → paket: `com.buraktopcu.caloria`
+AdMob → Caloria Android → **Mağaza ekle** → paket: `com.buraktopcu.calori`
 
 Play’de yayınlandıktan sonra “sınırlı reklam” uyarısı genelde kalkar.
 
