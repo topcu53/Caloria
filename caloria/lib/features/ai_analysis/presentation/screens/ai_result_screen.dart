@@ -72,13 +72,14 @@ class AiResultScreen extends ConsumerWidget {
           },
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Yemek adı kartı
-            Container(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.fromLTRB(24, 24, 24, 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Yemek adı kartı
+              Container(
               width: double.infinity,
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
@@ -139,7 +140,7 @@ class AiResultScreen extends ConsumerWidget {
               icon: Icons.water_drop_rounded,
             ),
 
-            const Spacer(),
+            const SizedBox(height: 28),
 
             // Kaydet butonları
             Text(
@@ -190,8 +191,8 @@ class AiResultScreen extends ConsumerWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 24),
           ],
+          ),
         ),
       ),
     );
