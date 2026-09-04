@@ -2,10 +2,160 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=privacy.html">
-  <title>Caloria</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caloria | AI Destekli Beslenme ve Kalori Takibi</title>
+  <style>
+    :root {
+      --primary: #8FCC75;
+      --primary-dark: #7AB561;
+      --text-main: #2D3748;
+      --text-muted: #718096;
+      --bg: #F7FAFC;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+      padding: 4rem 2rem;
+      text-align: center;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .logo-placeholder {
+      width: 100px;
+      height: 100px;
+      background-color: var(--primary);
+      border-radius: 24px;
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 3rem;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(143, 204, 117, 0.4);
+    }
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      color: #1a202c;
+      margin-bottom: 1rem;
+      letter-spacing: -0.05em;
+    }
+    .subtitle {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+    }
+    .download-btn {
+      display: inline-block;
+      background-color: #1a202c;
+      color: white;
+      padding: 1rem 2.5rem;
+      border-radius: 9999px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: transform 0.2s, background-color 0.2s;
+      box-shadow: 0 4px 14px 0 rgba(0,0,0,0.25);
+    }
+    .download-btn:hover {
+      transform: translateY(-3px);
+      background-color: #2d3748;
+    }
+    .features {
+      padding: 4rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    .feature-card {
+      background: white;
+      padding: 2.5rem 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+      text-align: center;
+      transition: transform 0.3s;
+    }
+    .feature-card:hover {
+      transform: translateY(-5px);
+    }
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .feature-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      color: #1a202c;
+    }
+    .feature-card p {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+    footer {
+      margin-top: auto;
+      background: #1a202c;
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    footer a {
+      color: #cbd5e0;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-size: 1rem;
+    }
+    footer a:hover {
+      color: white;
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-  <p><a href="privacy.html">Caloria Gizlilik Politikası</a></p>
+  <header>
+    <div class="logo-placeholder">C</div>
+    <h1>Caloria</h1>
+    <p class="subtitle">Yediğiniz yemeğin fotoğrafını çekin, yapay zeka kalori ve besin değerlerini saniyeler içinde hesaplasın. Hedefinize kolayca ulaşın!</p>
+    <!-- Uygulamanız Google Play'de yayınlandığında buradaki # işaretini Play Store linkinizle değiştirebilirsiniz -->
+    <a href="#" class="download-btn">Google Play'den İndirin</a>
+  </header>
+
+  <div class="features">
+    <div class="feature-card">
+      <div class="feature-icon">🤖</div>
+      <h3>Yapay Zeka Analizi</h3>
+      <p>Yemeğinizin fotoğrafını çekmeniz yeterli. Gemini AI sizin için kalori, protein, yağ ve karbonhidrat değerlerini anında analiz eder.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎯</div>
+      <h3>Kişisel Hedefler</h3>
+      <p>Kilo alma, verme veya koruma hedeflerinize göre günlük makro ihtiyaçlarınızı belirler ve gelişiminizi takip eder.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💧</div>
+      <h3>Su Hatırlatıcısı</h3>
+      <p>Sadece kalori değil, günlük içmeniz gereken su miktarını da takip eder ve bildirimlerle size su içmenizi hatırlatır.</p>
+    </div>
+  </div>
+
+  <footer>
+    <div style="margin-bottom: 1.5rem;">
+      <a href="privacy.html">Gizlilik Politikası</a>
+      <!-- mailto linkine kendi e-postanızı ekleyebilirsiniz -->
+      <a href="mailto:iletisim@caloria.app">İletişim</a> 
+    </div>
+    <p style="color: #718096; font-size: 0.9rem;">&copy; 2026 Caloria. Tüm hakları saklıdır.</p>
+  </footer>
 </body>
 </html>
